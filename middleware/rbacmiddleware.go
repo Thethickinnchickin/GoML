@@ -4,47 +4,41 @@ package middleware
 
 import (
     "net/http"
+   // "fmt"
+
+
+    "github.com/Thethickinnchickin/GoML/helpers"
 )
 
-var userStore = map[string]models.User{
-    "admin": {
-        Username: "admin",
-        Password: "password", 
-        Role: "admin",
-    },
-}
+
 
 
 // RBACMiddleware enforces role-based access control
 func RBACMiddleware(requiredRole string, next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        // Retrieve the user's role from the context or user model
-        // Parse JSON data from the request body
-        var credentials struct {
-            Username string `json:"username"`
-            Password string `json:"password"`
+        // Your JWT validation and user authentication logic here
+        // Check if the JWT token is valid
+        // If valid, call next.ServeHTTP(w, r) to proceed
+        // If invalid, return an error response
+
+        if requiredRole == "admin" {
+            if !helpers.IsAdminTokenValid(r) { // Replace IsTokenValid with your JWT validation logic
+                errorMessage := "Unauthorized: Invalid JWT token"
+                http.Error(w, errorMessage, http.StatusUnauthorized)
+                return
+            }
+        } else if requiredRole == "user" {
+            if !helpers.IsTokenValid(r) { // Replace IsTokenValid with your JWT validation logic
+                errorMessage := "Unauthorized: Invalid JWT token"
+                http.Error(w, errorMessage, http.StatusUnauthorized)
+                return
+            }
         }
 
-        userRole := getUserRoleFromContextOrModel(r) // Implement this function
 
-        // Check if the user has the required role
-        if userRole != requiredRole {
-            http.Error(w, "Forbidden: Insufficient role", http.StatusForbidden)
-            return
-        }
 
-        // If the user has the required role, proceed to the next handler
+        // Token is valid, proceed to the next handler
         next.ServeHTTP(w, r)
     })
+
 }
-
-func getUserRoleFromContextOrModel(r *http.Request) string {
-    ctx := r.Context()
-    userRole, ok := ctx.Value("userRole").(string)
-    if ok {
-        return userRole
-    }
-
-    return ""
-}
-

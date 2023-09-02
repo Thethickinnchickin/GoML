@@ -5,8 +5,7 @@ package middleware
 import (
     "net/http"
 
-    "github.com/dgrijalva/jwt-go"
-    "github.com/Thethickinnchickin/GoML/tokenValidation"
+    "github.com/Thethickinnchickin/GoML/helpers"
 )
 
 // AuthenticationMiddleware handles user authentication
@@ -17,7 +16,7 @@ func AuthenticationMiddleware(next http.Handler) http.Handler {
         // If valid, call next.ServeHTTP(w, r) to proceed
         // If invalid, return an error response
 
-        if !tokenValidation.IsTokenValid(r) { // Replace IsTokenValid with your JWT validation logic
+        if !helpers.IsTokenValid(r) { // Replace IsTokenValid with your JWT validation logic
             errorMessage := "Unauthorized: Invalid JWT token"
             http.Error(w, errorMessage, http.StatusUnauthorized)
             return
