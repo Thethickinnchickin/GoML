@@ -124,3 +124,25 @@ func IsAdminTokenValid(r *http.Request) bool {
 
     return false
 }
+
+func ExtractTokenFromRequest(r *http.Request) string {
+    authorizationHeader := r.Header.Get("Authorization")
+    if authorizationHeader == "" {
+        return ""
+    } 
+
+    // The token should be in the format "Bearer <token>"
+    parts := strings.Split(authorizationHeader, " ")
+    if len(parts) != 2 || parts[0] != "Bearer" {
+        
+        return ""
+    }
+
+    
+
+    tokenString := parts[1]
+
+    return tokenString
+
+
+}
