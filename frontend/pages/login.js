@@ -1,5 +1,3 @@
-
-import '../styles/Register.module.css';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
@@ -54,21 +52,24 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input type="text" name="username" value={credentials.username} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" value={credentials.password} onChange={handleChange} />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </form>
+    <div className='form container'>
+      <div className='col-4'>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div >
+            <label>Username:</label>
+            <input type="text" name="username" value={credentials.username} onChange={handleChange} />
+          </div>
+          <div className='my-4'>
+            <label>Password:</label>
+            <input type="password" name="password" value={credentials.password} onChange={handleChange} />
+          </div>
+          <div >
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+
 
     </div>
   );

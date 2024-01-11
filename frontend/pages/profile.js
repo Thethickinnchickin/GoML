@@ -68,11 +68,15 @@ function ProfilePage() {
   }
 
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p>Welcome! {user.username}</p>
-      {/* Display user profile data here */}
-      <button onClick={() => handleLogout()}>Logout</button>
+    <div className='container'>
+      <div className='row'>
+        <div className='col'>
+          <h1>User Profile</h1>
+          <p>Welcome! {user.username}</p>
+          {/* Display user profile data here */}
+          <button onClick={() => handleLogout()}>Logout</button>
+        </div>
+      </div>
     </div>
   );
 }

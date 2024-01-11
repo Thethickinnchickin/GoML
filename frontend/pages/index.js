@@ -34,50 +34,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      <nav className={`navbar navbar-expand-lg navbar-light ${styles.navbar}`}>
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">Your App</a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
 
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ml-auto">
-
-              { !tokenExists ? (
-                <>
-                  <li className="nav-item">
-                    <button onClick={() => routeTo('/login')} className={`btn btn-primary ${styles.button}`}>Login</button>
-                  </li>
-                  <li className="nav-item">
-                    <button onClick={() => routeTo('/register')} className={`btn btn-primary ${styles.button}`}>Register</button>
-                  </li>
-                </>
-              ) : (
-                <li className="nav-item">
-                  <button onClick={() => routeTo('/profile')} className={`btn btn-primary ${styles.button}`}>View Profile</button>
-                </li>
-              )}
-            </ul>
-          </div>
-          { tokenExists ? (
-            <button className="navbar-brand float-right" onClick={logout}>Logout</button>
-          ): (
-            <></>
-          )}
-          
-        </div>
-      </nav>
 
         <div className={styles.logoContainer}>
-
+        { !tokenExists ? (
+            <>
+              <h1>Want to hear a joke?</h1>
+            </>
+          ) : (
+            <>
+              <h1>You Suck</h1>
+            </>
+          )}
+            
         </div>
 
         <div className={styles.buttonContainer} >
@@ -91,6 +60,8 @@ export default function Home() {
               <button onClick={() => routeTo('/profile')} className={styles.button}>View Profile</button>
             </>
           )}
+
+
           
         </div>
         <div className='container'>

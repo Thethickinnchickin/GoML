@@ -60,7 +60,8 @@ export default function Register() {
   };
 
   return (
-    <div className='form'>
+    <div className='form container'>
+      <div className='col-4'>
       <h1>Register</h1>
       <form  onSubmit={handleSubmit}>
         <div>
@@ -93,10 +94,12 @@ export default function Register() {
             required
           />
         </div>
-        <div>
+        <div className='mt-4'>
           <button type="submit">Register</button>
         </div>
       </form>
+      </div>
+
     </div>
   );
 }
